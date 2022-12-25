@@ -15,7 +15,7 @@ screen.title("Turtle Crossing Game")
 screen.tracer(0)
 
 player = Player()
-car = Car()
+cars = Car()
 scoreboard = ScoreBoard()
 
 screen.listen()
@@ -30,8 +30,13 @@ while game_is_on:
     screen.update()
     screen.update()
     time.sleep(0.1)
-    car.create_cars()
-    car.move_car()
+    cars.create_cars()
+    cars.move_car()
+
+    for car in cars.all_cars:
+        if car.distance(player) < 20:
+            scoreboard.game_over()
+            game_is_on = False
 
     if player.ycor() > 280:
         player.reset_position()
